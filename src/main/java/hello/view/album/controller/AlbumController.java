@@ -23,7 +23,7 @@ public class AlbumController {
 	private RestTemplate restTemplate;
 
 	@RequestMapping(value = "/showAlbums")
-	public String greeting(Model model) {
+	public String showAlbums(Model model) {
 		String URL = "http://pcf-demo.local.pcfdev.io/albums";
 
 		ResponseEntity<List<Album>> rateResponse = restTemplate.exchange(URL, HttpMethod.GET, null,
