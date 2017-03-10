@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p th:text="Albums." />
+
+
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Release date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="album: ${albums}">
+				<td th:text="${album.title}">title sample</td>
+				<td th:text="${album.releaseYear}">2019 sample</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

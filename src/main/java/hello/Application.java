@@ -1,17 +1,11 @@
 package hello;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -49,12 +43,12 @@ public class Application {
 		 * 
 		 * Also, when starting PCF DEV use -k flag to import cert to repo
 		 * #cf dev start -k
-		 * 
+		 * s
 		 */
         System.setProperty("javax.net.ssl.trustStore","c:/Program Files/Java/jdk1.8.0_121/jre/lib/security/cacerts");
         System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
         
-		SpringApplication.run(Application.class);
+		SpringApplication.run(Application.class, args);
 	}
 	
 	@Bean
@@ -62,7 +56,12 @@ public class Application {
 		return builder.build();
 	}
 
-	@Bean
+	
+	/**
+	 * command line runner
+	 * uncomment this & #mvn spring-boot:run
+	 */
+/*	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
 			
@@ -79,5 +78,5 @@ public class Application {
 			}
 
 		};
-	}
+	}*/
 }
