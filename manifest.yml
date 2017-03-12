@@ -4,7 +4,6 @@ applications:
   memory: 512M
   random-route: false
   path: target/rest-consumer-0.1.0.jar
-  services: [test-pcf-demo-ws]
   env:
       SPRING_PROFILES_ACTIVE: cloud
 
