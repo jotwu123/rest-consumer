@@ -29,16 +29,6 @@ public class AlbumController {
 
 	private static final String PCF_DEMO_SERVICE = "pcf-demo";
 	
-	private String serviceUrl() {
-	    List<ServiceInstance> list = discoveryClient.getInstances(PCF_DEMO_SERVICE);
-	    String uri = "";
-	    if (list != null && list.size() > 0 ) {
-	    	
-	        uri = list.get(0).getUri().toString();
-	        return uri + "/albums";
-	    }
-	    return null;
-	}
 
 	@RequestMapping(value = "/showAlbums")
 	public String showAlbums(Model model) {
@@ -59,7 +49,7 @@ public class AlbumController {
 	
 	@RequestMapping(value = "/discoverAndShowAlbums")
 	public String discoverServiceAndShowAlbums(Model model) {
-		ResponseEntity<List<Album>> rateResponse = restTemplate.exchange(serviceUrl(), HttpMethod.GET, null,
+		ResponseEntity<List<Album>> rateResponse = restTemplate.exchange(findServiceByName(PCF_DEMO_SERVICE), HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<Album>>() {
 				});
 		List<Album> albums = rateResponse.getBody();
@@ -67,6 +57,19 @@ public class AlbumController {
 
 		log.info("discoverAndShowAlbums go to view now");
 		return "showAlbums";
+	}
+	
+	
+	
+	private String findServiceByName(String serviceName) {
+	    List<ServiceInstance> list = discoveryClient.getInstances(serviceName);
+	    String uri = "";
+	    if (list != null && list.size() > 0 ) {
+	    	
+	        uri = list.get(0).getUri().toString();
+	        return uri + "/albums";
+	    }
+	    return null;
 	}
 
 }
